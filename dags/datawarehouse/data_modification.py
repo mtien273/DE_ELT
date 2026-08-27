@@ -63,6 +63,7 @@ def update_rows(cur,conn,schema,row):
             
 def delete_rows(cur,conn,schema,ids_to_delete):
     try:
+        # Chuyển danh sách ID ['id1', 'id2'] thành chuỗi SQL dạng ('id1', 'id2')
         ids_to_delete = f"""({', '.join(f"'{id}'" for  id in ids_to_delete)})"""
         cur.execute(
 
