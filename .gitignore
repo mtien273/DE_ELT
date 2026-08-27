@@ -1,4 +1,11 @@
 venv/
 _pycache_/
+*.pyc
 .vscode/
 .env
+# Airflow logs
+logs/
+
+# Output data
+data/
+
