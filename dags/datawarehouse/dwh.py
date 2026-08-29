@@ -39,7 +39,7 @@ def staging_table():
         logger.info(f"{schema} table update completed")
 
     except Exception as e:
-        logger.error*(f"An error accured during the update of {schema} table: {e}")
+        logger.error(f"An error accured during the update of {schema} table: {e}")
         raise e
 
     finally:

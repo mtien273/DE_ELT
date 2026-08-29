@@ -1,8 +1,9 @@
 from datetime import timedelta, datetime
-def parse_duracation(duration_str):
+
+def parse_duration(duration_str):
     duration_str = duration_str.replace("P", "").replace("T", "")
     components = ["D", "H", "M", "S"]
-    value = {"D": 0, "H": 0, "M": 0, "S": 0}
+    values = {"D": 0, "H": 0, "M": 0, "S": 0}
 
     for component in components:
         if component in duration_str:
@@ -15,8 +16,9 @@ def parse_duracation(duration_str):
     return total_duration
 
 def transform_data(row):
-    duracation_td = parse_duracation(row['Duration'])
+    duration_td = parse_duration(row['Duration'])
     #Định nghĩa cột type dựa trên thời lượng được chuyển đổi từ time delta sang giây 
-    row['Duration'] = (datetime.min + duracation_td).time()
-    row["Video_Type"] = "Shorts" if duracation_td.total_seconds() <= 60 else "Normal"
+    row['Duration'] = (datetime.min + duration_td).time()
+    row["Video_Type"] = "Shorts" if duration_td.total_seconds() <= 60 else "Normal"
     return row
+

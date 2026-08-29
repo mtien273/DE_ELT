@@ -9,7 +9,7 @@ def get_conn_cursor():
     cur = conn.cursor(cursfor_factory=RealDictCursor)
     return conn, cur
 
-def close_conn_currsor(conn, cur):
+def close_conn_cursor(conn, cur):
     cur.close()
     conn.close()
 
@@ -18,14 +18,14 @@ def create_schema(schema):
     schema_sql = f"CREATE SCHEMA IF NOT EXISTS {schema};"
     cur.execute(schema_sql)
     conn.commit()
-    close_conn_currsor(conn, cur)
+    close_conn_cursor(conn, cur)
 
 def create_table(schema):
     conn, cur = get_conn_cursor()
 
     if schema == 'staging':
         table_sql = f"""
-                CREATE TABLE IF NOT EXISIS {schema}.{table}(
+                CREATE TABLE IF NOT EXISTS {schema}.{table}(
                     "Video_ID" VARCHAR(11) PRIMARY KEY NOT NULL,
                     "Video_Title" TEXT NOT NULL,
                     "Upload_Date" TIMESTAMP NOT NULL,
@@ -37,7 +37,7 @@ def create_table(schema):
             """
     else:
         table_sql = f"""
-                CREATE TABLE IF NOT EXISIS {schema}.{table}(
+                CREATE TABLE IF NOT EXISTS {schema}.{table}(
                     "Video_ID" VARCHAR(11) PRIMARY KEY NOT NULL,
                     "Video_Title" TEXT NOT NULL,
                     "Upload_Date" TIMESTAMP NOT NULL,
@@ -49,7 +49,7 @@ def create_table(schema):
             """
     cur.execute(table_sql)
     conn.commit()
-    close_conn_currsor(conn, cur)
+    close_conn_cursor(conn, cur)
 
 def get_video_ids(cur, schema):
     cur.execute(f"""SELECT "Video_ID" FROM {schema}.{table};""")
