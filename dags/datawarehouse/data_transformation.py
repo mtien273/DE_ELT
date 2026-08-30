@@ -11,7 +11,7 @@ def parse_duration(duration_str):
             values[component] = int(value)
 
     total_duration = timedelta(
-        days=values["D"], hours=values["H"], minutes=values["M"], secondsays=values["S"]
+        days=values["D"], hours=values["H"], minutes=values["M"], seconds=values["S"]
     )   
     return total_duration
 

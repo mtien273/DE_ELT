@@ -1,12 +1,12 @@
-from airflow.providers.standard.hooks.filesystem import PostgresHook
-from pyscong2.extras import RealDictCursor
+from airflow.providers.postgres.hooks.postgres import PostgresHook
+from psycopg2.extras import RealDictCursor
 
 table = "yt_api"
 
 def get_conn_cursor():
-    hook = PostgresHook(postgres_com_id="postgres_db_yt_elt", database ="elt_db")
+    hook = PostgresHook(postgres_conn_id="postgres_db_yt_elt", database ="elt_db")
     conn = hook.get_conn()
-    cur = conn.cursor(cursfor_factory=RealDictCursor)
+    cur = conn.cursor(cursor_factory=RealDictCursor)
     return conn, cur
 
 def close_conn_cursor(conn, cur):
@@ -31,7 +31,7 @@ def create_table(schema):
                     "Upload_Date" TIMESTAMP NOT NULL,
                     "Duration" VARCHAR(20) NOT NULL,
                     "Video_Views" INT,
-                    "Like_Count" INT,
+                    "Likes_Count" INT,
                     "Comments_Count" INT
                 );
             """
@@ -41,9 +41,10 @@ def create_table(schema):
                     "Video_ID" VARCHAR(11) PRIMARY KEY NOT NULL,
                     "Video_Title" TEXT NOT NULL,
                     "Upload_Date" TIMESTAMP NOT NULL,
-                    "Duration" VARCHAR(20) NOT NULL,
+                    "Duration" TIME NOT NULL,
+                    "Video_Type" VARCHAR(10) NOT NULL,
                     "Video_Views" INT,
-                    "Like_Count" INT,
+                    "Likes_Count" INT,
                     "Comments_Count" INT
                 );
             """
