@@ -30,7 +30,7 @@ def update_rows(cur,conn,schema,row):
         #staging
         if schema == 'staging':
             video_id = 'video_id'
-            upload_date = 'PublishedAt'
+            upload_date = 'publishedAt'
             video_title = 'title'
             video_views = 'viewCount'
             likes_count = 'likeCount'
@@ -77,6 +77,3 @@ def delete_rows(cur,conn,schema,ids_to_delete):
             logger.error(f"Error deleting row with ideo_ID:{ids_to_delete}")
             raise e
             
-
-
-
