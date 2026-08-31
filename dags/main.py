@@ -74,7 +74,7 @@ with DAG(
 
 # ---------- Data quanlity ----------
 with DAG(
-    dag_id="data_quanlity",
+    dag_id="data_quality",
     default_args= default_args,
     description="DAG to check the data quanlity on both layers in the db",
     schedule="0 16 * * *",
