@@ -47,10 +47,10 @@ x-airflow-common:
   &airflow-common
   # Sử dụng image tùy chỉnh được xây dựng dựa trên image Airflow mặc định (hiện tại; Mặc định: apache/airflow:2.9.2)
   # Image được lưu trữ trên Docker Hub
-  image: ${DOCKERHUB_NAMESPACE}/${DOCKERHUB_REPOSITORY}:${IMAGE_TAG}
+  image: ${DOCKERHUB_NAMESPACE}/${DOCKERHUB_REPOSITORY}:latest
   # Sử dụng tệp .env để đọc các tham số kết nối và biến môi trường - TẮT TÙY CHỌN NÀY KHỦNG DÙNG GITHUB ACTIONS
-  env_file:
-    - .env
+  # env_file:
+  #   - .env
   environment:
     &airflow-common-env
     # Thiết lập bộ thực thi (executor) thành CeleryExecutor 
@@ -111,23 +111,23 @@ services:
     container_name: postgres
     image: postgres:13
     # Sử dụng tệp .env để đọc các tham số kết nối - TẮT TÙY CHỌN NÀY KHI DÙNG GITHUB ACTIONS
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     # Các biến môi trường sau POSTGRES_PASSWORD cần thiết cho luồng công việc CI/CD - BẬT TẤT CẢ TÙY CHỌN NÀY KHI DÙNG GITHUB ACTIONS
     environment:
       - POSTGRES_USER=${POSTGRES_CONN_USERNAME}
       - POSTGRES_PASSWORD=${POSTGRES_CONN_PASSWORD}
-    #   - METADATA_DATABASE_NAME=${METADATA_DATABASE_NAME}
-    #   - METADATA_DATABASE_USERNAME=${METADATA_DATABASE_USERNAME}
-    #   - METADATA_DATABASE_PASSWORD=${METADATA_DATABASE_PASSWORD}
-    #   - ELT_DATABASE_NAME=${ELT_DATABASE_NAME}
-    #   - ELT_DATABASE_USERNAME=${ELT_DATABASE_USERNAME}
-    #   - ELT_DATABASE_PASSWORD=${ELT_DATABASE_PASSWORD}
-    #   - CELERY_BACKEND_NAME=${CELERY_BACKEND_NAME}
-    #   - CELERY_BACKEND_USERNAME=${CELERY_BACKEND_USERNAME}
-    #   - CELERY_BACKEND_PASSWORD=${CELERY_BACKEND_PASSWORD}
-    #   - POSTGRES_CONN_HOST=${POSTGRES_CONN_HOST}
-    #   - POSTGRES_CONN_PORT=${POSTGRES_CONN_PORT}
+      - METADATA_DATABASE_NAME=${METADATA_DATABASE_NAME}
+      - METADATA_DATABASE_USERNAME=${METADATA_DATABASE_USERNAME}
+      - METADATA_DATABASE_PASSWORD=${METADATA_DATABASE_PASSWORD}
+      - ELT_DATABASE_NAME=${ELT_DATABASE_NAME}
+      - ELT_DATABASE_USERNAME=${ELT_DATABASE_USERNAME}
+      - ELT_DATABASE_PASSWORD=${ELT_DATABASE_PASSWORD}
+      - CELERY_BACKEND_NAME=${CELERY_BACKEND_NAME}
+      - CELERY_BACKEND_USERNAME=${CELERY_BACKEND_USERNAME}
+      - CELERY_BACKEND_PASSWORD=${CELERY_BACKEND_PASSWORD}
+      - POSTGRES_CONN_HOST=${POSTGRES_CONN_HOST}
+      - POSTGRES_CONN_PORT=${POSTGRES_CONN_PORT}
     ports:
       - 5432:5432
     volumes:
