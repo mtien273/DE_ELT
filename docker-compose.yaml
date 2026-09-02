@@ -140,7 +140,7 @@ services:
       retries: 5
       start_period: 5s
     restart: always
-
+#
   redis:
     # Redis bị giới hạn ở phiên bản 7.2-bookworm do sự thay đổi về bản quyền phần mềm
     # https://redis.io/blog/redis-adopts-dual-source-available-licensing/
